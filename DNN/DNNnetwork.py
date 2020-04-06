@@ -1,21 +1,18 @@
-import numpy as np
-from ConnectionLayer import FullConnection;
-
-def sigmoid(weight_inp):
-    return 1.0/(1.0 + np.exp(-weight_inp))
+from ConnectionLayer import FullConnection
 
 
-def derivative(output):
-    return output * (1 - output)
+def identity_derivative(output):
+    return 1
 
 
 class DNNnet():
-    def __init__(self, layers):
-        layer_count = len(layers)
+    def __init__(self, loss_func_derivative):
+        self.loss_func_drt = loss_func_derivative
         self.layers = []
-        for i in range(1,layer_count):
-            conn = FullConnection(layers[i-1], layers[i], sigmoid)
-            self.layers.append(conn)
+
+    def add_layer(self, input_size, output_size, activator, derivative):
+        conn = FullConnection(input_size, output_size, activator, derivative)
+        self.layers.append(conn)
 
     def predict(self, sample):
         output = sample
@@ -25,15 +22,22 @@ class DNNnet():
 
     def train_one_example(self, example, label, learning_rate):
         output = self.predict(example)
-        loss_value = np.sqrt(np.sum(np.square(output - label)))
-        print("loss value %f" % loss_value)
+        # loss_value = np.sqrt(np.sum(np.square(output - label)))
+        # print("loss value %f" % loss_value)
         self.calc_gradient(output, label)
         self.update_weight(learning_rate)
 
     def calc_gradient(self, output, label):
-        delta = (label-output) * derivative(output)
-        for layer in self.layers[::-1]:
-            delta = layer.backward(delta, derivative)
+        delta = self.loss_func_drt(label, output) * self.layers[-1].derivative(output)
+        delta = -1*delta
+
+        for i in range(len(self.layers)-1, -1, -1):
+            layer = self.layers[i]
+            if i > 0:
+                delta = layer.backward(delta, self.layers[i-1].derivative)
+            else:
+                delta = layer.backward(delta, identity_derivative)
+                print("fasaa")
         return delta
 
     def train(self, labels, data_set, rate, epoch, num):

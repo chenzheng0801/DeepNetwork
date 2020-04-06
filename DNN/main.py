@@ -2,7 +2,28 @@ import os
 import struct
 import numpy as np
 import matplotlib.pyplot as plt
+
 from DNNnetwork import DNNnet
+
+
+def sigmoid(weight_inp):
+    return 1.0/(1.0 + np.exp(-weight_inp))
+
+
+def sigmoid_derivative(output):
+    return output * (1 - output)
+
+
+def linear(weight_inp):
+    return weight_inp
+
+
+def linear_derivative(output):
+    return 1
+
+
+def MSE_derivative(label, output):
+    return output-label
 
 
 def norm(label):
@@ -10,9 +31,9 @@ def norm(label):
     label_value = label
     for i in range(10):
         if i == label_value:
-            label_vec.append(0.9)
+            label_vec.append(1)
         else:
-            label_vec.append(0.1)
+            label_vec.append(0.0)
     return label_vec
 
 
@@ -42,6 +63,7 @@ def get_result(inv):
 
     return max_index
 
+
 def evaluate(network, test_datas, test_labels, n):
     error = 0
     total = n
@@ -53,17 +75,58 @@ def evaluate(network, test_datas, test_labels, n):
     return float(error) / float(total)
 
 
+def check_gradient(network, inp_vec, out_vec, dim):
+    predict_value = network.predict(inp_vec)
+    gradient = network.calc_gradient(predict_value, out_vec)
+    grad_now = -gradient[0]
+
+    epsilon = 0.0000000001
+    epsilon_vec = np.zeros((dim, 1), dtype="float64")
+    epsilon_vec[0] = epsilon
+
+    inp_vec = inp_vec + epsilon_vec
+    delta1 = network.predict(inp_vec)
+    loss_value1 = np.sum(np.square(delta1 - out_vec))
+    inp_vec = inp_vec - 2*epsilon_vec
+    delta2 = network.predict(inp_vec)
+    loss_value2 = np.sum(np.square(delta2 - out_vec))
+
+    grad_target = (loss_value1 - loss_value2)/(4*epsilon)
+
+    print("expected gradient %.13f, real gradient %.13f" %(grad_target, grad_now))
+
+
+def build_net(layers):
+    net = DNNnet(MSE_derivative)
+    layer_count = len(layers)
+    for i in range(1, layer_count):
+        # net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative)
+        if i < layer_count-1:
+            net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative)
+        else:
+            net.add_layer(layers[i - 1], layers[i], linear, linear_derivative)
+    return net
+
+
 if __name__ == "__main__":
     data_path = os.path.abspath(os.path.dirname(__file__))
-    images, labels, n = load_mnist(data_path)
+    images, labels, num = load_mnist(data_path)
     labels_vec = []
-    for i in range(n):
+    for i in range(num):
         labels_vec.append(np.array(norm(labels[i])).reshape(10, 1))
 
+    rate = 0.0013
+    epoch = 14
+    network = build_net([784, 30, 10])
+
+    # check_gradient(network, images[0], labels_vec[0], 784)
+
+    train_images = images #[images[0]]
+    train_labels = labels_vec #[labels_vec[0]]
+    train_num = num #1
+    network.train(train_labels, train_images, rate, epoch, train_num)
+
     test_datas, test_labels, test_n = load_mnist(data_path, "t10k")
-    rate = 0.3
-    epoch = 4
-    network = DNNnet([784, 40, 40, 10])
-    network.train(labels_vec, images, rate, epoch, n)
     error_ratio = evaluate(network, test_datas, test_labels, test_n )
+
     print("error ratio %f" % error_ratio)
