@@ -14,26 +14,35 @@ def sigmoid_derivative(output):
     return output * (1 - output)
 
 
-def linear(weight_inp):
-    return weight_inp
-
-
-def linear_derivative(output):
+def identity_derivative(output):
     return 1
 
 
+def identity(inp):
+    return inp
+
+
+def soft_max(inp):
+    exp_inp = np.exp(inp)
+    return exp_inp/(np.sum(exp_inp, axis=-1, keepdims=True))
+
+
+def soft_max_derivative(label, output):
+    return output - label
+
+
 def MSE_derivative(label, output):
-    return output-label
+    return output - label
 
 
-def norm(label):
+def norm(label, dim):
     label_vec = []
     label_value = label
-    for i in range(10):
+    for i in range(dim):
         if i == label_value:
             label_vec.append(1)
         else:
-            label_vec.append(0.0)
+            label_vec.append(0)
     return label_vec
 
 
@@ -44,11 +53,11 @@ def load_mnist(path, kind="train"):
 
     with open(images_path, "rb") as images_operator:
         magic, num, rows, cols = struct.unpack(">IIII", images_operator.read(16))
-        images = np.fromfile(images_operator, dtype = np.uint8).reshape(num, rows*cols, 1)
+        images = np.fromfile(images_operator, dtype=np.uint8).reshape(num, rows*cols)
 
     with open(labels_path, "rb") as labels_operator:
         magic, n = struct.unpack(">II", labels_operator.read(8))
-        labels = np.fromfile(labels_operator, dtype = np.uint8)
+        labels = np.fromfile(labels_operator, dtype=np.uint8)
 
     return images, labels, num
 
@@ -69,7 +78,7 @@ def evaluate(network, test_datas, test_labels, n):
     total = n
 
     for i in range(n):
-        label = get_result(network.predict((test_datas[i])))
+        label = get_result(network.predict((test_datas[i]))[0])
         if label != test_labels[i]:
             error += 1
     return float(error) / float(total)
@@ -97,36 +106,38 @@ def check_gradient(network, inp_vec, out_vec, dim):
 
 
 def build_net(layers):
-    net = DNNnet(MSE_derivative)
+    net = DNNnet(soft_max_derivative, soft_max)
     layer_count = len(layers)
     for i in range(1, layer_count):
         # net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative)
         if i < layer_count-1:
             net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative)
         else:
-            net.add_layer(layers[i - 1], layers[i], linear, linear_derivative)
+            net.add_layer(layers[i - 1], layers[i], identity, identity_derivative)
     return net
 
 
 if __name__ == "__main__":
     data_path = os.path.abspath(os.path.dirname(__file__))
-    images, labels, num = load_mnist(data_path)
-    labels_vec = []
+    images, train_labels, num = load_mnist(data_path)
+    labels_vecs = []
     for i in range(num):
-        labels_vec.append(np.array(norm(labels[i])).reshape(10, 1))
+        labels_vecs.append(np.array(norm(train_labels[i], dim=10)))
 
-    rate = 0.0013
-    epoch = 14
-    network = build_net([784, 30, 10])
+    rate = 0.00013
+    epoch = 20
+    network = build_net([784, 40, 40, 40, 10])
 
     # check_gradient(network, images[0], labels_vec[0], 784)
 
     train_images = images #[images[0]]
-    train_labels = labels_vec #[labels_vec[0]]
-    train_num = num #1
-    network.train(train_labels, train_images, rate, epoch, train_num)
+    train_labels_vecs = np.array(labels_vecs) #[labels_vec[0]]
+    train_num = num
+    network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=1)
 
     test_datas, test_labels, test_n = load_mnist(data_path, "t10k")
-    error_ratio = evaluate(network, test_datas, test_labels, test_n )
+    error_ratio = evaluate(network, test_datas, test_labels, test_n)
+    print("error ratio on test data set %f" % error_ratio)
 
-    print("error ratio %f" % error_ratio)
+    error_ratio = evaluate(network, train_images, train_labels, train_num)
+    print("error ratio on train data set %f" % error_ratio)
