@@ -2,7 +2,7 @@ import os
 import struct
 import numpy as np
 import matplotlib.pyplot as plt
-
+from numba import jit
 from DNNnetwork import DNNnet
 
 
@@ -73,6 +73,7 @@ def get_result(inv):
     return max_index
 
 
+@jit(forceobj=True)
 def evaluate(network, test_datas, test_labels, n):
     error = 0
     total = n
@@ -124,8 +125,6 @@ if __name__ == "__main__":
     for i in range(num):
         labels_vecs.append(np.array(norm(train_labels[i], dim=10)))
 
-    rate = 0.00013
-    epoch = 20
     network = build_net([784, 40, 40, 40, 10])
 
     # check_gradient(network, images[0], labels_vec[0], 784)
@@ -133,7 +132,33 @@ if __name__ == "__main__":
     train_images = images #[images[0]]
     train_labels_vecs = np.array(labels_vecs) #[labels_vec[0]]
     train_num = num
-    network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=1)
+
+
+    # rate = 0.01
+    # epoch = 8
+    # network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=32)
+    # rate = 0.0059
+    # epoch = 4
+    # network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=32)
+    # rate = 0.003
+    # epoch = 8
+    # network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=32)
+    rate = 0.1
+    epoch = 6
+    momentum = 0.4
+    network.train(train_labels_vecs, train_images, rate, epoch, train_num,
+                  batch=256, optimizer="sgd_momentum", momentum=momentum)
+
+    rate = 0.02
+    epoch = 6
+    momentum = 0.9
+    network.train(train_labels_vecs, train_images, rate, epoch, train_num,
+                  batch=1024, optimizer="sgd_momentum", momentum=momentum)
+    rate = 0.01
+    epoch = 8
+    momentum = 0.9
+    network.train(train_labels_vecs, train_images, rate, epoch, train_num,
+                  batch=2048, optimizer="sgd_momentum", momentum=momentum)
 
     test_datas, test_labels, test_n = load_mnist(data_path, "t10k")
     error_ratio = evaluate(network, test_datas, test_labels, test_n)
