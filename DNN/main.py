@@ -110,11 +110,21 @@ def build_net(layers):
     net = DNNnet(soft_max_derivative, soft_max)
     layer_count = len(layers)
     for i in range(1, layer_count):
-        # net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative)
         if i < layer_count-1:
             net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative)
         else:
             net.add_layer(layers[i - 1], layers[i], identity, identity_derivative)
+    return net
+
+
+def build_BatchNet(layers):
+    net = DNNnet(soft_max_derivative, soft_max)
+    layer_count = len(layers)
+    for i in range(1, layer_count):
+        if i < layer_count-1:
+            net.add_layer(layers[i - 1], layers[i], sigmoid, sigmoid_derivative, layer="batchnorm")
+        else:
+            net.add_layer(layers[i - 1], layers[i], identity, identity_derivative, layer="batchnorm")
     return net
 
 
@@ -125,14 +135,17 @@ if __name__ == "__main__":
     for i in range(num):
         labels_vecs.append(np.array(norm(train_labels[i], dim=10)))
 
-    network = build_net([784, 40, 40, 40, 10])
-
+    # network = build_net([784, 40, 40, 40, 10])
+    network = build_BatchNet([784, 40, 40, 40, 10])
     # check_gradient(network, images[0], labels_vec[0], 784)
 
     train_images = images #[images[0]]
     train_labels_vecs = np.array(labels_vecs) #[labels_vec[0]]
     train_num = num
 
+    rate = 0.1
+    epoch = 8
+    network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=32)
 
     # rate = 0.01
     # epoch = 8
@@ -143,22 +156,22 @@ if __name__ == "__main__":
     # rate = 0.003
     # epoch = 8
     # network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=32)
-    rate = 0.1
-    epoch = 6
-    momentum = 0.4
-    network.train(train_labels_vecs, train_images, rate, epoch, train_num,
-                  batch=256, optimizer="sgd_momentum", momentum=momentum)
-
-    rate = 0.02
-    epoch = 6
-    momentum = 0.9
-    network.train(train_labels_vecs, train_images, rate, epoch, train_num,
-                  batch=1024, optimizer="sgd_momentum", momentum=momentum)
-    rate = 0.01
-    epoch = 8
-    momentum = 0.9
-    network.train(train_labels_vecs, train_images, rate, epoch, train_num,
-                  batch=2048, optimizer="sgd_momentum", momentum=momentum)
+    # rate = 0.1
+    # epoch = 6
+    # momentum = 0.4
+    # network.train(train_labels_vecs, train_images, rate, epoch, train_num,
+    #               batch=256, optimizer="sgd_momentum", momentum=momentum)
+    #
+    # rate = 0.02
+    # epoch = 6
+    # momentum = 0.9
+    # network.train(train_labels_vecs, train_images, rate, epoch, train_num,
+    #               batch=1024, optimizer="sgd_momentum", momentum=momentum)
+    # rate = 0.01
+    # epoch = 8
+    # momentum = 0.9
+    # network.train(train_labels_vecs, train_images, rate, epoch, train_num,
+    #               batch=2048, optimizer="sgd_momentum", momentum=momentum)
 
     test_datas, test_labels, test_n = load_mnist(data_path, "t10k")
     error_ratio = evaluate(network, test_datas, test_labels, test_n)

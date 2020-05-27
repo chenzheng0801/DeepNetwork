@@ -90,7 +90,7 @@ class BatchNorm(object):
     def backward(self, delta, derivative, learning_rate, batch):
         eps = 1e-5
         delta_gamma = np.sum(delta, axis=0, keepdims=True)
-        delta_beta = np.dot(self.std_inp.T, delta)
+        delta_beta = np.sum(self.std_inp * delta, axis=0, keepdims=True)
         self.gamma += delta_gamma
         self.beta += delta_beta
         delta_std_x = self.beta * delta

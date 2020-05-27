@@ -1,4 +1,4 @@
-from ConnectionLayer import FullConnection
+from ConnectionLayer import FullConnection, BatchNorm
 import numpy as np
 from numba import jit
 
@@ -20,8 +20,11 @@ class DNNnet():
         self.layers = []
         self.toltal_iteration = 0
 
-    def add_layer(self, input_size, output_size, activator, derivative):
-        conn = FullConnection(input_size, output_size, activator, derivative)
+    def add_layer(self, input_size, output_size, activator, derivative, layer="fullconnection"):
+        if layer == "fullconnection":
+            conn = FullConnection(input_size, output_size, activator, derivative)
+        elif layer == "batchnorm":
+            conn = BatchNorm(input_size, output_size, activator, derivative)
         self.layers.append(conn)
 
     def predict(self, samples):

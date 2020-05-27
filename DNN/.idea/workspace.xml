@@ -20,11 +20,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ConnectionLayer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConnectionLayer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ConnectionLayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1440">
-              <caret line="93" column="33" lean-forward="true" selection-start-line="93" selection-start-column="33" selection-end-line="93" selection-end-column="33" />
+            <state relative-caret-position="1273">
+              <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -32,13 +32,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DNNnetwork.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DNNnetwork.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DNNnetwork.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1159">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="111">
+              <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
               <folding>
-                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#0#53#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,11 +47,20 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2888">
-              <caret line="157" column="13" selection-start-line="157" selection-start-column="13" selection-end-line="157" selection-end-column="13" />
+            <state relative-caret-position="180">
+              <caret line="147" selection-start-line="147" selection-end-line="147" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/codecs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="308" selection-start-line="308" selection-end-line="308" />
             </state>
           </provider>
         </entry>
@@ -95,13 +104,13 @@
         <option value="$PROJECT_DIR$/Loader.py" />
         <option value="$PROJECT_DIR$/Minist_loader.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/DNNnetwork.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/ConnectionLayer.py" />
+        <option value="$PROJECT_DIR$/DNNnetwork.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="125" />
     <option name="y" value="5" />
     <option name="width" value="1750" />
@@ -112,7 +121,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -124,6 +132,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -274,17 +283,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15059446" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1354029" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4993395" weight="0.32905984" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.27410832" side_tool="true" visible="true" weight="0.35185185" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.3322325" side_tool="true" visible="true" weight="0.37321937" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.4993395" weight="0.32905984" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.72589165" weight="0.35327634" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7252312" weight="0.35185185" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4993395" weight="0.32905984" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3737931" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6677675" visible="true" weight="0.37321937" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -325,19 +335,14 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DNNnetwork.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/DNNnetwork.py</url>
-          <line>46</line>
-          <option name="timeStamp" value="73" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>148</line>
+          <line>161</line>
           <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ConnectionLayer.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="91" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -347,7 +352,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="86" />
+      <option name="time" value="94" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -359,6 +364,11 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>self.layers[i-1].derivative</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>self.weight</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -369,7 +379,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.dot(self.weight.T, delta)</expression-string>
+        <expression-string />
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -381,7 +391,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Node.py" />
     <entry file="file://$PROJECT_DIR$/Layer.py" />
     <entry file="file://$PROJECT_DIR$/ConnectionLayer.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -552,20 +561,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DNNnetwork.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1159">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="195">
+          <caret line="308" selection-start-line="308" selection-end-line="308" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2888">
-          <caret line="157" column="13" selection-start-line="157" selection-start-column="13" selection-end-line="157" selection-end-column="13" />
+        <state relative-caret-position="180">
+          <caret line="147" selection-start-line="147" selection-end-line="147" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -574,10 +580,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ConnectionLayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1440">
-          <caret line="93" column="33" lean-forward="true" selection-start-line="93" selection-start-column="33" selection-end-line="93" selection-end-column="33" />
+        <state relative-caret-position="1273">
+          <caret line="67" column="28" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DNNnetwork.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
           </folding>
         </state>
       </provider>
