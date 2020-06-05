@@ -19,6 +19,13 @@ class FullConnection(object):
         self.input = input_vec
 
     @jit(forceobj=True)
+    def do_inference(self, input_vec):
+        output = np.add(np.dot(input_vec, self.weight), self.b)
+        output = self.activator(output)
+        self.input = input_vec
+        return output
+
+    @jit(forceobj=True)
     def foward(self, input_vec):
         output = np.add(np.dot(input_vec, self.weight), self.b)
         output = self.activator(output)
@@ -87,12 +94,21 @@ class BatchNorm(object):
         return output
 
     @jit(forceobj=True)
+    def do_inference(self, input_vec):
+        eps = 1e-5
+        linear_output = np.add(np.dot(input_vec, self.weight), self.b)
+        std_inp = (linear_output - self.runing_mean) / np.sqrt(self.runing_var + eps)
+        final_inp = self.beta * std_inp + self.gamma
+        output = self.activator(final_inp)
+        return output
+
+    @jit(forceobj=True)
     def backward(self, delta, derivative, learning_rate, batch):
         eps = 1e-5
         delta_gamma = np.sum(delta, axis=0, keepdims=True)
         delta_beta = np.sum(self.std_inp * delta, axis=0, keepdims=True)
-        self.gamma += delta_gamma
-        self.beta += delta_beta
+        self.gamma += learning_rate*delta_gamma
+        self.beta += learning_rate*delta_beta
         delta_std_x = self.beta * delta
 
         delta_x = batch * delta_std_x - np.sum(delta_std_x, axis=0, keepdims=True)\

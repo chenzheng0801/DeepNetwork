@@ -79,7 +79,7 @@ def evaluate(network, test_datas, test_labels, n):
     total = n
 
     for i in range(n):
-        label = get_result(network.predict((test_datas[i]))[0])
+        label = get_result(network.do_inference((test_datas[i]))[0])
         if label != test_labels[i]:
             error += 1
     return float(error) / float(total)
@@ -103,7 +103,7 @@ def check_gradient(network, inp_vec, out_vec, dim):
 
     grad_target = (loss_value1 - loss_value2)/(4*epsilon)
 
-    print("expected gradient %.13f, real gradient %.13f" %(grad_target, grad_now))
+    print("expected gradient %.13f, real gradient %.13f" % (grad_target, grad_now))
 
 
 def build_net(layers):

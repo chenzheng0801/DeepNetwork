@@ -37,6 +37,14 @@ class DNNnet():
         output_batch = self.output_layer(output_batch)
         return output_batch
 
+    def do_inference(self, sample):
+        output = sample
+        for layer in self.layers:
+            output = layer.do_inference(output)
+
+        output = self.output_layer(output)
+        return output
+
     def batch_gradient(self, output_batch, label_batch, rate, batch, momentum=0):
         delta = self.loss_func_drt(label_batch, output_batch)\
                 * self.layers[-1].derivative(output_batch)
