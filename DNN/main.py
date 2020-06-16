@@ -143,7 +143,7 @@ if __name__ == "__main__":
     train_labels_vecs = np.array(labels_vecs) #[labels_vec[0]]
     train_num = num
 
-    rate = 0.1
+    rate = 0.09
     epoch = 8
     network.train(train_labels_vecs, train_images, rate, epoch, train_num, batch=32)
 
