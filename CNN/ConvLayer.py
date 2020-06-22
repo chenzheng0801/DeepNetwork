@@ -13,7 +13,7 @@ class Convolution:
         self.stride = stride
         self.padding = padding
 
-        l = -0.01
+        l = -0.001
         r = -l
         self.filters = np.random.uniform(l, r, filter_shape)
         self.bias = np.random.uniform(l, r, (1, filter_shape[3]))
