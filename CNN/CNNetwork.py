@@ -22,8 +22,8 @@ class CNNet:
         self.toltal_iteration = 0
 
     def add_layer(self, shape, activator=None,
-                  derivative=None, strides=(2, 2),
-                  padding=(0, 0), layer="FullConnection"):
+                  derivative=None, strides=2,
+                  padding=0, layer="FullConnection"):
         conn = None
         if layer == "FullConnection":
             conn = FullConnection(shape, activator, derivative)
@@ -36,7 +36,7 @@ class CNNet:
         if conn:
             self.layers.append(conn)
 
-    # @jit(forceobj=True)
+    @jit(forceobj=True)
     def predict(self, samples):
         output_batch = samples
         # i = 0

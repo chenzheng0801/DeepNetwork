@@ -1,5 +1,5 @@
 import numpy as np
-# from numba import jit
+from numba import jit
 from numpy.lib.stride_tricks import as_strided
 
 class Convolution:
@@ -13,7 +13,7 @@ class Convolution:
         self.stride = stride
         self.padding = padding
 
-        l = -0.00001
+        l = -0.01
         r = -l
         self.filters = np.random.uniform(l, r, filter_shape)
         self.bias = np.random.uniform(l, r, (1, filter_shape[3]))
@@ -46,7 +46,7 @@ class Convolution:
         )
         return row, col
 
-    # @jit(forceobj=True)
+    @jit(forceobj=True)
     def forward(self, img):
         padding = self.padding
         stride = self.stride
@@ -62,7 +62,7 @@ class Convolution:
         feature_map = np.tensordot(self.im2col_X, self.filters, axes=[(3, 4, 5), (0, 1, 2)]) + self.bias
         return feature_map
 
-    # @jit(forceobj=True)
+    @jit(forceobj=True)
     def backward(self, delta, rate):
         im2col_X = self.im2col_X
         batch = self.pad_img.shape[0]

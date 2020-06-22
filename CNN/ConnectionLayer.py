@@ -18,13 +18,13 @@ class FullConnection:
         self.activator = activator
         self.derivative = derivative
 
-    @jit(forceobj=True)
+    # @jit(forceobj=True)
     def forward(self, input_vec):
         output = np.add(np.dot(input_vec, self.weight), self.b)
         self.input_vec = input_vec
         return self.activator(output)
 
-    @jit(forceobj=True)
+    # @jit(forceobj=True)
     def backward(self, delta, rate):
         res_delta = self.derivative(self.input_vec)
         res_delta = res_delta * np.dot(delta, self.weight.T)

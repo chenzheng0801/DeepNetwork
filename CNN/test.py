@@ -61,20 +61,20 @@ def build_CNNet():
     net = CNNet(softmax_derivative, softmax)
 
     # output image shape=[28*28*6]
-    net.add_layer(shape=(3, 3, 1, 6), strides=(1, 1),
-                  padding=(1, 1), layer="Convolution")
+    net.add_layer(shape=(3, 3, 1, 6), strides=1,
+                  padding=1, layer="Convolution")
 
     # output image shape=[14*14*6]
-    net.add_layer(shape=(2, 2, 6), strides=(2, 2),
-                  padding=(0, 0), layer="MaxPooling")
+    net.add_layer(shape=(2, 2, 6), strides=2,
+                  padding=0, layer="MaxPooling")
 
     # output image shape=[10*10*16]
-    net.add_layer(shape=(5, 5, 6, 16), strides=(1, 1),
-                  padding=(0, 0), layer="Convolution")
+    net.add_layer(shape=(5, 5, 6, 16), strides=1,
+                  padding=0, layer="Convolution")
 
     # output image shape=[5*5*16]
-    net.add_layer(shape=(2, 2, 16), strides=(2, 2),
-                  padding=(0, 0), layer="MaxPooling")
+    net.add_layer(shape=(2, 2, 16), strides=2,
+                  padding=0, layer="MaxPooling")
 
     # output dimension = 400
     net.add_layer(shape=400, layer="ShapeTransform")
@@ -102,6 +102,6 @@ if __name__ == "__main__":
     train_num = num
 
     network = build_CNNet()
-    rate = 0.03
+    rate = 0.0001
     epoch = 20
     network.train(train_labels, train_images, rate, epoch, train_num, batch=50)
