@@ -13,7 +13,7 @@ class Convolution:
         self.stride = stride
         self.padding = padding
 
-        l = -1
+        l = -0.00001
         r = -l
         self.filters = np.random.uniform(l, r, filter_shape)
         self.bias = np.random.uniform(l, r, (1, filter_shape[3]))
@@ -33,13 +33,18 @@ class Convolution:
         new_width = (W - f_w) // stride + 1
         row_i = stride * np.repeat(np.arange(new_height), new_width)
         row_j = np.repeat(np.arange(f_h), f_w)
-        row_idx = row_i.reshape(-1, 1) + row_j.reshape(1, -1)
+        row = np.add.outer(
+            row_i.reshape(new_height, new_width),
+            row_j.reshape(f_h, f_w)
+        )
 
-        col_i = stride * np.tile(np.arange(new_width), new_height)
+        col_i = np.tile(stride * np.arange(new_width), new_height)
         col_j = np.tile(np.arange(f_w), f_h)
-        col_idx = col_i.reshape(-1, 1) + col_j.reshape(1, -1)
-        C_idx = np.tile(np.arange(C), new_height*new_width*f_h*f_w)
-        return row_idx.reshape(-1), col_idx.reshape(-1), C_idx, new_height*new_width, f_h*f_w, C
+        col = np.add.outer(
+            col_i.reshape(new_height, new_width),
+            col_j.reshape(f_h, f_w)
+        )
+        return row, col
 
     # @jit(forceobj=True)
     def forward(self, img):
@@ -75,59 +80,43 @@ class Convolution:
         self.filters += rate * delta_filters
 
         back_delta = np.tensordot(delta, self.filters, axes=[3, 3])
-        row_idx, col_idx, C_idx, row, col, C = self.get_im2col_indcies(self.pad_img.shape,
-                                                                       self.filter_shape[0],
-                                                                       self.filter_shape[1],
-                                                                       self.stride)
-        back_delta = back_delta.reshape(-1)
-        np.add.at(zeros_delta, (slice(None), row_idx, col_idx, C_idx), back_delta)
+        row_idx, col_idx = self.get_im2col_indcies(self.pad_img.shape,
+                                                   self.filter_shape[0],
+                                                   self.filter_shape[1],
+                                                   self.stride)
+        np.add.at(zeros_delta, (slice(None), row_idx, col_idx, slice(None)), back_delta)
 
         res_delta = zeros_delta[:, pad:height-pad, pad:width-pad, :]
         return res_delta
 
-def get_pool2row_indices(x_shape, field_height, field_width, stride=1):
-    # First figure out what the size of the output should be
-    N, C, H, W = x_shape
-    assert (H - field_height) % stride == 0
-    assert (W - field_height) % stride == 0
-    out_height = int((H - field_height) / stride + 1)
-    out_width = int((W - field_width) / stride + 1)
-
-    # 行坐标
-    i0 = stride * np.repeat(np.arange(out_height), out_width)
-    i0 = np.tile(i0, C)
-    i1 = np.repeat(np.arange(field_height), field_width)
-
-    # 列坐标
-    j0 = stride * np.tile(np.arange(out_width), out_height * C)
-    j1 = np.tile(np.arange(field_width), field_height)
-
-    i = i0.reshape(-1, 1) + i1.reshape(1, -1)
-    j = j0.reshape(-1, 1) + j1.reshape(1, -1)
-
-    k = np.repeat(np.arange(C), out_height * out_width).reshape(-1, 1)
-
-    return (k, i, j)
-
 if __name__ == "__main__":
-
-    # a = np.zeros((3,3))
-    b = np.array([
-        [
-            [1,2,3],
-            [4,5,6],
-            [7,8,9]
-        ],
-        [
-            [1, 1, 1],
-            [1, 1, 1],
-            [1, 1, 1]
-        ]
-    ])
-    row = np.array([1,1,1,1], dtype="int32")
-    i=[0,0,1,1]
-    j=[0,0,1,1]
-    np.add.at(b, (slice(None), [[0,1]], [[0,1]]), [ [[[1,1,1]],[[1,2,3]]], [[[1,1,1]],[[1,1,1]]] ])
+    # a = np.array([
+    #     [1,1],
+    #     [2,2]
+    # ])
+    # b = np.array([
+    #     [0, 0],
+    #     [1, 1]
+    # ])
+    # c = np.add.outer(a, b)
+    # b = np.array([
+    #     [
+    #         [1, 2, 3],
+    #         [4, 5, 6],
+    #         [7, 8, 9]
+    #     ],
+    #     [
+    #         [1, 1, 1],
+    #         [1, 1, 1],
+    #         [1, 1, 1]
+    #     ]
+    # ])
+    # print(b[:,0,:])
+    #
+    # row = np.array([1, 1, 1, 1], dtype="int32")
+    # i = [0, 0, 1, 1]
+    # j = [0, 0, 1, 1]
+    # np.add.at(b, (slice(None), [[0,1]], [[0,1]]), [ [[[1,1,1]],[[1,2,3]]], [[[1,1,1]],[[1,1,1]]] ])
     #
     # arry = np.array([
     #     [[
@@ -150,6 +139,6 @@ if __name__ == "__main__":
     for i in range(40):
         now_y = conv.forward(img)
         loss_mat = 2*(std_y - now_y)
-        conv.backward(loss_mat, 0.03)
+        conv.backward(loss_mat, 0.08)
         loss_value = np.sum(loss_mat**2)
         print(loss_value)

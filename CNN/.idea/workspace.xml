@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ConvLayer.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ConvLayer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ConvLayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="670">
-              <caret line="129" column="12" lean-forward="true" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
+            <state relative-caret-position="-112">
+              <caret line="73" column="55" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="55" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -23,11 +23,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons/numpy/core/__init__.py">
+      <file leaf-file-name="PoolingLayer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/PoolingLayer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="3800" column="20" lean-forward="true" selection-start-line="3800" selection-start-column="20" selection-end-line="3800" selection-end-column="20" />
+            <state relative-caret-position="200">
+              <caret line="46" column="25" lean-forward="true" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -37,18 +40,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
               <caret line="6" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PoolingLayer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PoolingLayer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -99,6 +90,8 @@
       <find>self.output_size</find>
       <find>col_idx</find>
       <find>idx</find>
+      <find>np.argmax</find>
+      <find>reshape</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -107,11 +100,11 @@
         <option value="$PROJECT_DIR$/MaxPoolLayer.py" />
         <option value="$PROJECT_DIR$/ActivationLayer.py" />
         <option value="$PROJECT_DIR$/ConvertLayer.py" />
-        <option value="$PROJECT_DIR$/PoolingLayer.py" />
         <option value="$PROJECT_DIR$/ConnectionLayer.py" />
         <option value="$PROJECT_DIR$/CNNetwork.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/ConvLayer.py" />
+        <option value="$PROJECT_DIR$/PoolingLayer.py" />
       </list>
     </option>
   </component>
@@ -126,6 +119,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,7 +131,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -156,7 +149,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.ConvLayer">
+  <component name="RunManager" selected="Python.PoolingLayer">
     <configuration name="ConvLayer" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CNN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -218,9 +211,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.PoolingLayer" />
         <item itemvalue="Python.ConvLayer" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.PoolingLayer" />
       </list>
     </recent_temporary>
   </component>
@@ -240,16 +233,16 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.22523117" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4985755" visible="true" weight="0.22523117" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3148148" />
-      <window_info id="Structure" order="2" visible="true" weight="0.24966975" />
+      <window_info id="Structure" order="2" sideWeight="0.5014245" side_tool="true" visible="true" weight="0.22523117" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.21794872" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.33903134" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -267,7 +260,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/PoolingLayer.py</url>
-          <line>78</line>
+          <line>109</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -296,87 +289,77 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>57</line>
+          <line>62</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>153</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>82</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>84</line>
+          <line>88</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>151</line>
-          <option name="timeStamp" value="54" />
+          <line>61</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ConvLayer.py</url>
-          <line>140</line>
-          <option name="timeStamp" value="55" />
+          <line>75</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ConvLayer.py</url>
+          <line>79</line>
+          <option name="timeStamp" value="63" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="67" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>zeros_delta[0,:,:,0]</expression-string>
+        <expression-string>self.filters[:,:,0,0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>col_idx</expression-string>
+        <expression-string>self.filters</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>back_delta</expression-string>
+        <expression-string>conv.filters</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>row_idx</expression-string>
+        <expression-string>conv.filters[:,:,0,0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>i1.reshape(1, -1)</expression-string>
+        <expression-string>delta_filters</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>i0.reshape(-1, 1)</expression-string>
+        <expression-string>delta_b</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>np.repeat(np.arange(out_height), out_width)</expression-string>
+        <expression-string>feature_map</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>output_batch[23,:,:,3]</expression-string>
+        <expression-string>loss_mat[0,:,:,0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>output_batch[0,:,:,4]</expression-string>
+        <expression-string>loss_mat</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -736,16 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PoolingLayer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CNNetwork.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -784,6 +757,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons/numpy/core/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="3800" column="20" selection-start-line="3800" selection-start-column="20" selection-end-line="3800" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ConvertLayer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -791,17 +771,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/python-skeletons/numpy/core/__init__.py">
+    <entry file="file://D:/Anaconda3/envs/DeepLearning/Lib/site-packages/numpy/core/fromnumeric.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="3800" column="20" lean-forward="true" selection-start-line="3800" selection-start-column="20" selection-end-line="3800" selection-end-column="20" />
+        <state relative-caret-position="146">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ConvLayer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="670">
-          <caret line="129" column="12" lean-forward="true" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
+        <state relative-caret-position="-112">
+          <caret line="73" column="55" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PoolingLayer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="46" column="25" lean-forward="true" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
