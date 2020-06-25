@@ -79,6 +79,7 @@ class CNNet:
     def update_weight(self, train_samples, train_labels, rate):
         output_batch = self.predict(train_samples)
         self.back_gradient(output_batch, train_labels, rate)
-        loss_batch = np.einsum("Bi,Bi->B", train_labels, np.log(output_batch))
+        eps = 1e-5
+        loss_batch = np.einsum("Bi,Bi->B", train_labels, np.log(output_batch+eps))
         return -np.sum(loss_batch)
 

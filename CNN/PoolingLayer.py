@@ -77,13 +77,10 @@ class MaxPooling:
         self.im2col_row = im2col_row[oh_idx, ow_idx, feature_idx]
         self.im2col_col = im2col_col[oh_idx, ow_idx, feature_idx]
 
-        # ReLu Layer
-        self.relu_map = (1 * (feature_map > 0))
-        return self.relu_map * feature_map
+        return feature_map
 
     @jit(forceobj=True)
     def backward(self, delta, rate=0.0):
-        relu_delta = self.relu_map * delta
         zeros_delta = np.zeros(self.pad_img.shape)
         pad = self.padding
 
@@ -96,7 +93,7 @@ class MaxPooling:
 
         batch_idx = np.repeat(np.arange(batch), ch*oh*ow).reshape((batch, oh, ow, ch))
         ch_idx = np.tile(np.arange(ch), batch*oh*ow).reshape((batch, oh, ow, ch))
-        np.add.at(zeros_delta, (batch_idx, self.im2col_row, self.im2col_col, ch_idx), relu_delta)
+        np.add.at(zeros_delta, (batch_idx, self.im2col_row, self.im2col_col, ch_idx), delta)
 
         res_delta = zeros_delta[:, pad:height-pad, pad:width-pad, :]
         return res_delta

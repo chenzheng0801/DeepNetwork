@@ -60,10 +60,14 @@ class Convolution:
                                   'constant', constant_values=0)
         self.im2col_X = self.im2col_as_strided(self.pad_img, flt_h, flt_w, stride)
         feature_map = np.tensordot(self.im2col_X, self.filters, axes=[(3, 4, 5), (0, 1, 2)]) + self.bias
-        return feature_map
+        # ReLu Layer
+        self.relu_map = (1 * (feature_map > 0))
+        return self.relu_map * feature_map
 
     @jit(forceobj=True)
     def backward(self, delta, rate):
+        delta = self.relu_map * delta
+
         im2col_X = self.im2col_X
         batch = self.pad_img.shape[0]
         height = self.pad_img.shape[1]
